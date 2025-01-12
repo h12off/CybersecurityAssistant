@@ -1,8 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
 
-// Initialize the Gemini API with your key
-const genAI = new GoogleGenerativeAI('AIzaSyAPSRbpZVkmE68FJ8Jz86MMGxhBZf88kkU');
+const GEMINI_API_KEY = 'AIzaSyAPSRbpZVkmE68FJ8Jz86MMGxhBZf88kkU';
 
 export async function POST(req: Request) {
   try {
@@ -15,32 +14,24 @@ export async function POST(req: Request) {
       );
     }
 
-    // Get the model
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
-    // Convert chat messages to a prompt
-    const prompt = messages
-      .map(m => `${m.role === 'system' ? 'System: ' : 'User: '}${m.content}`)
-      .join('\n');
+    // Convert the chat format to a single prompt for Gemini
+    const systemMessage = messages.find(m => m.role === 'system')?.content || '';
+    const userMessage = messages.find(m => m.role === 'user')?.content || '';
+    
+    const prompt = `${systemMessage}\n\nUser Question: ${userMessage}`;
 
-    try {
-      // Generate content
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-      return NextResponse.json({ content: text });
-    } catch (error: any) {
-      console.error('Gemini API Error:', error);
-      return NextResponse.json(
-        { error: 'Failed to generate response from Gemini' },
-        { status: 500 }
-      );
-    }
+    return NextResponse.json({ content: text });
   } catch (error: any) {
-    console.error('Request Error:', error);
+    console.error('Gemini API Error:', error);
     return NextResponse.json(
-      { error: error.message || 'Failed to process request' },
+      { error: error.message || 'Failed to get response from Gemini' },
       { status: 500 }
     );
   }

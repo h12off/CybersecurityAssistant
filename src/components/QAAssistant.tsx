@@ -61,7 +61,7 @@ export default function QAAssistant() {
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
               <ClientOnly>
-                <MessageCircle className="w-6 h-6 text-green-400" />
+                <img src="/logo.svg" alt="Cybersecurity Assistant Logo" className="w-8 h-8" />
               </ClientOnly>
               <h2 className="text-2xl font-bold text-green-400">Cybersecurity Assistant</h2>
             </div>
