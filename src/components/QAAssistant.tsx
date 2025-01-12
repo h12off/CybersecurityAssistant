@@ -3,29 +3,8 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import dynamic from 'next/dynamic';
-import { Loader2 } from 'lucide-react';
-
-// Dynamically import icons to prevent hydration mismatch
-const MessageCircle = dynamic(() => import('lucide-react').then(mod => mod.MessageCircle), {
-  ssr: false,
-  loading: () => <Loader2 className="h-6 w-6 animate-spin" />
-});
-
-const Send = dynamic(() => import('lucide-react').then(mod => mod.Send), {
-  ssr: false,
-  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
-});
-
-const AlertTriangle = dynamic(() => import('lucide-react').then(mod => mod.AlertTriangle), {
-  ssr: false,
-  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
-});
-
-const RefreshCcw = dynamic(() => import('lucide-react').then(mod => mod.RefreshCcw), {
-  ssr: false,
-  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
-});
+import { MessageCircle, Send, AlertTriangle, RefreshCcw, Loader2 } from 'lucide-react';
+import { ClientOnly } from './client-wrapper';
 
 const DEFAULT_OPENAI_KEY = process.env.OPENAI_API_KEY;
 
@@ -118,7 +97,9 @@ export default function QAAssistant() {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <MessageCircle className="w-6 h-6 text-green-400" />
+              <ClientOnly>
+                <MessageCircle className="w-6 h-6 text-green-400" />
+              </ClientOnly>
               <h2 className="text-2xl font-bold text-green-400">Cybersecurity Assistant</h2>
             </div>
             <p className="text-sm text-green-600">Created by Salma Ait Nassir</p>
@@ -127,7 +108,9 @@ export default function QAAssistant() {
             onClick={handleConfigure}
             className="flex items-center gap-2 px-3 py-1.5 text-sm bg-black/50 text-green-400 rounded-lg hover:bg-green-500/20 border border-green-500/50"
           >
-            <RefreshCcw className="w-4 h-4" />
+            <ClientOnly>
+              <RefreshCcw className="w-4 h-4" />
+            </ClientOnly>
             Configure API
           </button>
         </div>
@@ -136,7 +119,9 @@ export default function QAAssistant() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isConfigured && (
             <Alert variant="destructive" className="mb-4 bg-red-900/50 border-red-500 text-red-300">
-              <AlertTriangle className="h-4 w-4" />
+              <ClientOnly>
+                <AlertTriangle className="h-4 w-4" />
+              </ClientOnly>
               <AlertDescription>
                 Please configure your OpenAI API key to continue
               </AlertDescription>
@@ -158,19 +143,25 @@ export default function QAAssistant() {
                 className="absolute bottom-3 right-3 p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed border border-green-500/50"
                 aria-label="Send message"
               >
-                <Send className="w-4 h-4" />
+                <ClientOnly>
+                  <Send className="w-4 h-4" />
+                </ClientOnly>
               </button>
             </div>
 
             {loading && (
               <div className="flex items-center justify-center p-4">
-                <RefreshCcw className="w-6 h-6 animate-spin text-green-400" />
+                <ClientOnly>
+                  <RefreshCcw className="w-6 h-6 animate-spin text-green-400" />
+                </ClientOnly>
               </div>
             )}
 
             {error && (
               <Alert variant="destructive" className="bg-red-900/50 border-red-500 text-red-300">
-                <AlertTriangle className="h-4 w-4" />
+                <ClientOnly>
+                  <AlertTriangle className="h-4 w-4" />
+                </ClientOnly>
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
@@ -187,7 +178,9 @@ export default function QAAssistant() {
 
         <div className="mt-6 space-y-2">
           <div className="flex items-center gap-2 text-sm text-green-600">
-            <AlertTriangle className="w-4 h-4" />
+            <ClientOnly>
+              <AlertTriangle className="w-4 h-4" />
+            </ClientOnly>
             <p>For cybersecurity queries only. Use responsibly and in accordance with OpenAI's usage policies.</p>
           </div>
           <p className="text-center text-sm text-green-600 pt-2 border-t border-green-500/30">
