@@ -126,7 +126,7 @@ export default function QAAssistant() {
             <ClientOnly>
               <AlertTriangle className="w-4 h-4" />
             </ClientOnly>
-            <p>For cybersecurity queries only. Use responsibly and in accordance with Google's AI usage policies.</p>
+            <p>For cybersecurity queries only.</p>
           </div>
           <p className="text-center text-sm text-green-600 pt-2 border-t border-green-500/30">
             2025 Salma Ait Nassir. All rights reserved.
