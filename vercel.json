@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "regions": ["fra1"],
+  "github": {
+    "silent": true
+  },
+  "domains": ["www.sstrust.cloud", "sstrust.cloud"],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "sstrust.cloud"
+        }
+      ],
+      "destination": "https://www.sstrust.cloud",
+      "permanent": true
+    }
+  ]
+}
