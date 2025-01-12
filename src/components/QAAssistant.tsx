@@ -14,7 +14,7 @@ export default function QAAssistant() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [apiKey, setApiKey] = useState(DEFAULT_OPENAI_KEY);
-  const [isConfigured, setIsConfigured] = useState(!!DEFAULT_OPENAI_KEY);
+  const [isConfigured, setIsConfigured] = useState(false); // Start with false to prevent hydration mismatch
 
   const configureAPI = (key: string) => {
     if (key && (key.startsWith('sk-') || key.startsWith('sk-proj-'))) {
@@ -117,16 +117,16 @@ export default function QAAssistant() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {!isConfigured && (
-            <Alert variant="destructive" className="mb-4 bg-red-900/50 border-red-500 text-red-300">
-              <ClientOnly>
+          <ClientOnly>
+            {!isConfigured && (
+              <Alert variant="destructive" className="mb-4 bg-red-900/50 border-red-500 text-red-300">
                 <AlertTriangle className="h-4 w-4" />
-              </ClientOnly>
-              <AlertDescription>
-                Please configure your OpenAI API key to continue
-              </AlertDescription>
-            </Alert>
-          )}
+                <AlertDescription>
+                  Please configure your OpenAI API key to continue
+                </AlertDescription>
+              </Alert>
+            )}
+          </ClientOnly>
           
           <div className="space-y-4">
             <div className="relative">
@@ -162,7 +162,9 @@ export default function QAAssistant() {
                 <ClientOnly>
                   <AlertTriangle className="h-4 w-4" />
                 </ClientOnly>
-                <AlertDescription>{error}</AlertDescription>
+                <ClientOnly>
+                  <AlertDescription>{error}</AlertDescription>
+                </ClientOnly>
               </Alert>
             )}
 
