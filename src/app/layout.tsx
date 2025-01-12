@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Share_Tech_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 const techMono = Share_Tech_Mono({
@@ -139,7 +138,6 @@ export default function RootLayout({
       </head>
       <body className={`${techMono.className} h-full bg-black text-green-400 antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   )

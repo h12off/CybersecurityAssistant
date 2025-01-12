@@ -1,47 +1,37 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
 
-export async function POST(request: Request) {
+const GEMINI_API_KEY = 'AIzaSyAPSRbpZVkmE68FJ8Jz86MMGxhBZf88kkU';
+
+export async function POST(req: Request) {
   try {
-    const { messages, apiKey } = await request.json();
+    const { messages } = await req.json();
 
-    if (!apiKey) {
+    if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured', code: 'no_api_key' },
-        { status: 500 }
+        { error: 'Invalid request format' },
+        { status: 400 }
       );
     }
 
-    const openai = new OpenAI({
-      apiKey: apiKey,
-    });
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
-    try {
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: messages,
-        temperature: 0.7,
-        max_tokens: 500,
-      });
+    // Convert the chat format to a single prompt for Gemini
+    const systemMessage = messages.find(m => m.role === 'system')?.content || '';
+    const userMessage = messages.find(m => m.role === 'user')?.content || '';
+    
+    const prompt = `${systemMessage}\n\nUser Question: ${userMessage}`;
 
-      return NextResponse.json(completion.choices[0].message);
-    } catch (openaiError: any) {
-      if (openaiError.code === 'insufficient_quota') {
-        return NextResponse.json({
-          error: 'API key has exceeded its quota. Please check your billing details or use a different API key.',
-          code: 'insufficient_quota'
-        }, { status: 429 });
-      }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-      throw openaiError;
-    }
+    return NextResponse.json({ content: text });
   } catch (error: any) {
-    console.error('OpenAI API Error:', error);
+    console.error('Gemini API Error:', error);
     return NextResponse.json(
-      { 
-        error: error.message || 'Failed to process request',
-        code: error.code
-      },
+      { error: error.message || 'Failed to get response from Gemini' },
       { status: 500 }
     );
   }
