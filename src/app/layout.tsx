@@ -25,8 +25,14 @@ export const metadata: Metadata = {
   },
   description: 'Get expert cybersecurity guidance with our AI-powered assistant. Real-time threat analysis, security best practices, and professional advice for your cybersecurity needs.',
   keywords: 'cybersecurity assistant, AI security, cyber threat analysis, security guidance, cybersecurity expert, AI cybersecurity tool, security best practices, cyber defense, information security, network security',
-  authors: [{ name: 'Salma Ait Nassir' }],
+  authors: [{ name: 'Salma Ait Nassir', url: 'https://github.com/h12off' }],
   creator: 'Salma Ait Nassir',
+  publisher: 'Salma Ait Nassir',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -34,12 +40,21 @@ export const metadata: Metadata = {
     title: 'AI-Powered Cybersecurity Assistant | Expert Security Guidance',
     description: 'Get expert cybersecurity guidance with our AI-powered assistant. Real-time threat analysis, security best practices, and professional advice.',
     siteName: 'Cybersecurity Assistant',
+    images: [
+      {
+        url: '/social-share.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Cybersecurity Assistant - AI-Powered Security Guidance',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'AI-Powered Cybersecurity Assistant',
     description: 'Expert cybersecurity guidance powered by AI',
     creator: '@salmaaitnassir',
+    images: ['/social-share.svg'],
   },
   robots: {
     index: true,
@@ -75,6 +90,15 @@ export const metadata: Metadata = {
     statusBarStyle: 'black',
     title: 'Cybersecurity Assistant',
   },
+  verification: {
+    google: 'your-google-site-verification',
+    yandex: 'your-yandex-verification',
+    yahoo: 'your-yahoo-verification',
+    other: {
+      'norton-safeweb': 'your-norton-verification',
+    },
+  },
+  category: 'Technology',
 }
 
 export default function RootLayout({
@@ -99,6 +123,18 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00ff00" />
         <meta name="msapplication-TileColor" content="#000000" />
+
+        {/* Social Media Tags */}
+        <meta property="og:site_name" content="Cybersecurity Assistant" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:creator" content="@salmaaitnassir" />
+        <meta name="twitter:site" content="@salmaaitnassir" />
+        
+        {/* Additional SEO Tags */}
+        <meta name="referrer" content="origin-when-cross-origin" />
+        <meta name="skype_toolbar" content="skype_toolbar_parser_compatible" />
+        <meta name="format-detection" content="telephone=no" />
       </head>
       <body className={`${techMono.className} h-full bg-black text-green-400 antialiased`}>
         {children}
