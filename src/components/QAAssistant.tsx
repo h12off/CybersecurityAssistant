@@ -61,9 +61,9 @@ export default function QAAssistant() {
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
               <ClientOnly>
-                <img src="/logo.svg" alt="SSTrust Security Logo" className="w-8 h-8" />
+                <img src="/logo.svg" alt="Cybersecurity Assistant Logo" className="w-8 h-8" />
               </ClientOnly>
-              <h2 className="text-2xl font-bold text-green-400">SSTrust Security</h2>
+              <h2 className="text-2xl font-bold text-green-400">Cybersecurity Assistant</h2>
             </div>
             <p className="text-sm text-green-600">Created by Salma Ait Nassir</p>
           </div>

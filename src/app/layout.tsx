@@ -20,14 +20,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.sstrust.cloud'),
   title: {
-    default: 'SSTrust | AI-Powered Cybersecurity Assistant',
-    template: '%s | SSTrust Security'
+    default: 'AI-Powered Cybersecurity Assistant | Expert Security Guidance',
+    template: '%s | Cybersecurity Assistant'
   },
-  description: 'Enhance your cybersecurity with SSTrust - Your AI-powered security assistant. Get expert guidance, real-time threat analysis, and professional cybersecurity advice.',
-  keywords: 'SSTrust, cybersecurity assistant, AI security, cyber threat analysis, security guidance, cybersecurity expert, AI cybersecurity tool, security best practices, cyber defense, information security, network security',
+  description: 'Get expert cybersecurity guidance with our AI-powered assistant. Real-time threat analysis, security best practices, and professional advice for your cybersecurity needs.',
+  keywords: 'cybersecurity assistant, AI security, cyber threat analysis, security guidance, cybersecurity expert, AI cybersecurity tool, security best practices, cyber defense, information security, network security',
   authors: [{ name: 'Salma Ait Nassir', url: 'https://github.com/h12off' }],
   creator: 'Salma Ait Nassir',
-  publisher: 'SSTrust Security',
+  publisher: 'Salma Ait Nassir',
   formatDetection: {
     email: false,
     address: false,
@@ -37,21 +37,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.sstrust.cloud',
-    siteName: 'SSTrust Security',
-    title: 'SSTrust | AI-Powered Cybersecurity Assistant',
-    description: 'Enhance your cybersecurity with SSTrust - Your AI-powered security assistant. Get expert guidance and real-time threat analysis.',
+    title: 'AI-Powered Cybersecurity Assistant | Expert Security Guidance',
+    description: 'Get expert cybersecurity guidance with our AI-powered assistant. Real-time threat analysis, security best practices, and professional advice.',
+    siteName: 'Cybersecurity Assistant',
     images: [
       {
         url: '/social-share.svg',
         width: 1200,
         height: 630,
-        alt: 'SSTrust - AI-Powered Security Guidance',
+        alt: 'Cybersecurity Assistant - AI-Powered Security Guidance',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SSTrust | AI Security Assistant',
+    title: 'AI-Powered Cybersecurity Assistant',
     description: 'Expert cybersecurity guidance powered by AI',
     creator: '@salmaaitnassir',
     images: ['/social-share.svg'],
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black',
-    title: 'SSTrust Security',
+    title: 'Cybersecurity Assistant',
   },
   verification: {
     google: 'your-google-site-verification',
@@ -125,7 +125,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#000000" />
 
         {/* Social Media Tags */}
-        <meta property="og:site_name" content="SSTrust Security" />
+        <meta property="og:site_name" content="Cybersecurity Assistant" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:creator" content="@salmaaitnassir" />

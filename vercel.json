@@ -2,20 +2,43 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "regions": ["fra1"],
-  "github": {
-    "silent": true
-  },
-  "domains": ["www.sstrust.cloud", "sstrust.cloud"],
+  "regions": ["cdg1"],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "sstrust.cloud"
-        }
-      ],
+      "source": "/www.sstrust.cloud",
       "destination": "https://www.sstrust.cloud",
       "permanent": true
     }
