@@ -3,7 +3,29 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { MessageCircle, Send, AlertTriangle, RefreshCcw } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { Loader2 } from 'lucide-react';
+
+// Dynamically import icons to prevent hydration mismatch
+const MessageCircle = dynamic(() => import('lucide-react').then(mod => mod.MessageCircle), {
+  ssr: false,
+  loading: () => <Loader2 className="h-6 w-6 animate-spin" />
+});
+
+const Send = dynamic(() => import('lucide-react').then(mod => mod.Send), {
+  ssr: false,
+  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
+});
+
+const AlertTriangle = dynamic(() => import('lucide-react').then(mod => mod.AlertTriangle), {
+  ssr: false,
+  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
+});
+
+const RefreshCcw = dynamic(() => import('lucide-react').then(mod => mod.RefreshCcw), {
+  ssr: false,
+  loading: () => <Loader2 className="h-4 w-4 animate-spin" />
+});
 
 const DEFAULT_OPENAI_KEY = process.env.OPENAI_API_KEY;
 
